@@ -12,15 +12,23 @@
         <h1 class="text-center mt-5" :id="id">Vue Practice</h1>
         <hr>
         <div id="app">
-            <h2><span :title="title">{{ name }}</span></h2>
-            <a :href="src">Go</a>
-            <p v-html="btn"></p> 
-            <p>Counter : {{ counter }}</p>
-            <button @mouseover="increment()">Increment</button>
-             <button>Decrement</button>
-             <button :disabled="isButtonDisabled">Button</button>
-             <img :src="path" :alt="alt" >
-              <button @click="method($event)">Button</button>
+            <h3>Skills:</h3>
+            <input type="text" v-model="newSkill">
+            <button @click="addNewSkill">Add</button>
+            <ul>
+                <li v-for="(skill, i) of skills" @click="remove(i)" :key="skill">
+                  {{ i }} - {{ skill.toUpperCase() }}
+                </li>
+            </ul>
+          <ul>
+              <li v-for="person of persons" >
+                  {{ person.name }}
+              </li>
+          </ul>
+
+          <hr>
+          <h1 v-if="mode">This is text</h1>
+          <button @click="toggle">Toggle</button>
         </div>
     </div>
 

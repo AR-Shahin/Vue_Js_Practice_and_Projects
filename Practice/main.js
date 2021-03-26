@@ -1,25 +1,27 @@
 const app = Vue.createApp({
     data (){
-        return {
-            name : 'Hello Shahin',
-            title : 'ars',
-            src : 'https://www.facebook.com/',
-            btn : '<a href="https://www.facebook.com/">Click Me</a>',
-            counter : 0,
-            id:'customId',
-            isButtonDisabled: true,
-            path : 'dd.jpg',
-            alt : 'This is an Image',
-        
+        return {  
+           skills : ['PHP','java','Laravel'],
+           newSkill : '',
+           persons : [{name: 'shahin',age : 21},{name : 'omi',age:22}],
+            mode : false
         }
     },
     methods : {
-        increment(){
-            this.counter++
-        },
-        method(ev){
-            console.log(ev);
+    addNewSkill(){
+        if(this.newSkill == ''){
+            alert('empty!')
+            return
         }
+        this.skills.push(this.newSkill);
+        this.newSkill =''
+    },
+    remove(i){
+        this.skills.splice(1,i);
+    },
+    toggle(){
+this.mode = !this.mode
+    }
     }
  
 }).mount('#app')
