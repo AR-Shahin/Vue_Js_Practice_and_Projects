@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue To Do</title>
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-2">Vue To Do</h1>
+        <hr>
+        <div id="app">
+            <div class="row">
+              <div class="col-md-4">
+                <input type="text" class="form-control" v-model="name" placeholder="Enter your name">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" v-model="roll" placeholder="Enter your roll">
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-sm btn-block btn-success" @click="addNewData">Add New Data</button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Sl</th>
+                    <th>Name</th>
+                    <th>Roll</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr v-for="(data,index) in database" :key="data.name">
+                    <td>{{ index+1 }}</td>
+                    <td>{{ data.name}}</td>
+                    <td>{{ data.roll }}</td>
+                    <td><a href="" class="btn btn-sm btn-block btn-danger"@click.prevent="deleteRow(index)">Delete</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/vue3.js"></script>
+    <script src="assets/main.js"></script>
+</body>
+</html>
