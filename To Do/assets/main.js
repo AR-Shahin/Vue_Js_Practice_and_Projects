@@ -40,7 +40,9 @@ const app = Vue.createApp({
             this.roll = ''
         },
         deleteRow(index){
-            this.database.splice(1,index);
+            this.database = this.database.filter((item,i) => {
+                return i!= index
+            })
         }
     },
     watch :{
