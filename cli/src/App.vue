@@ -1,8 +1,8 @@
 <template>
   <div>
       <Navbar/>
-      <div class="container mx-auto py-10">
-        <ToDoComponent/>
+      <div class="container mx-auto py-10 text-center">
+        <router-view></router-view>
       </div>
       <Footer></Footer>
   </div>
@@ -12,12 +12,11 @@
 <script>
 import Navbar from './components/Navbar';
 import Footer from './components/Footer'
-import ToDoComponent from './components/ToDoComponent.vue';
+
 
 export default {
   name: 'App',
   components: {
-    ToDoComponent,
     Navbar,Footer
   }
 }

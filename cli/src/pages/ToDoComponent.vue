@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mx-auto">
         <h1 class="text-center text-3xl font-medium pb-1">{{ title }}</h1>
         <hr>
         <div class="grid grid-cols-3 gap-4 mt-2">
@@ -86,7 +86,7 @@
         computed : {
             setDefaultData(){
               return this.database.length
-            },
+            }
         }
     }
 </script>
