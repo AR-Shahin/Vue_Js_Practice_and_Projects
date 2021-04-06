@@ -2,7 +2,9 @@
     <div>
      <Header></Header>
      <div v-for=" (chat ,i) in chats" :key="i">
-          <ChatList :data="chat"></ChatList>
+           <router-link to="/messages">
+                <ChatList :data="chat"></ChatList>
+            </router-link>
      </div>
    
     

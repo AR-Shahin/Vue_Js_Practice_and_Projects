@@ -1,12 +1,16 @@
 <template>
     <div>
-        <h1>This a custom component</h1>
+        <h1>This a custom component -> {{id}}</h1>
     </div>
 </template>
 
 <script>
     export default {
-        
+        data(){
+            return {
+                id : this.$route.params.id ? this.$route.params.id  : 404
+            }
+        }
     }
 </script>
 

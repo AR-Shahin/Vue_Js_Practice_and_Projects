@@ -129,7 +129,8 @@ import Modal from '../components/ice/Modal'
             getCartAmount(){
                 return this.cart.reduce((t, variant) => t + variant.price, 0);
             }
-        }
+        },
+
     }
 </script>
 

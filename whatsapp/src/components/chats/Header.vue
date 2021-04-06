@@ -14,7 +14,7 @@
                     </div>
                     <!-- bottom -->
                     <div class="bottom flex w-full">
-                        <h2 class="w-1/4 text-center py-3 pl-2 text-gray-500"> <span class="material-icons text-white">cameraaltrounded</span></h2>
+                        <h2 class="w-1/4 text-center py-3 pl-2 text-gray-500"> <span class="material-icons text-white">camera_alt</span></h2>
                         <h2 class="w-1/4 text-center py-3 border-b-2 border-white">CHATS</h2>
                         <h2 class="w-1/4 text-center py-3 text-gray-500">CALLS</h2>
                         <h2 class="w-1/4 text-center py-3 pr-3 text-gray-500">CONTACTS</h2>
