@@ -16,9 +16,14 @@ const routes = [
         component : () => import(/* webpackChunkName: "mark-down" */ '../pages/MarkDown')
     },
     { 
+        path: "/slider",
+        name:'slider',
+        component : () => import(/* webpackChunkName: "calculator" */ '../pages/Slider')
+    },
+    { 
         path: "/calculator",
         name:'calculator',
-        component : () => import(/* webpackChunkName: "calculator" */ '../pages/Calculator')
+        component : () => import('../pages/Calculator')
     },
     {  path: '/:pathMatch(.*)*',
        name: 'NotFound',
