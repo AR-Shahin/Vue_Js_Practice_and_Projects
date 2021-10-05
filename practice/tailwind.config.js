@@ -9,7 +9,12 @@ module.exports = {
     },
     variants: {
       extend: {},
+        float: ['responsive', 'direction'],
+        margin: ['responsive', 'direction'],
+        padding: ['responsive', 'direction'],
     },
-    plugins: [],
+    plugins: [
+        require('tailwindcss-dir')(),
+    ],
   }
   
