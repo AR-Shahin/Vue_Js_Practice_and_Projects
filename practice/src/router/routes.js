@@ -30,6 +30,11 @@ const routes = [
         name:'slot',
         component : () => import('../pages/Slot')
     },
+    { 
+        path: "/test",
+        name:'test',
+        component : () => import('../pages/Test')
+    },
     {  path: '/:pathMatch(.*)*',
        name: 'NotFound',
        component:  () => import( '../pages/404.vue')

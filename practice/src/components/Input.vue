@@ -1,8 +1,9 @@
 <template>
-    <input :type="type" class="w-full p-1 rounded border" :id="id" :placeholder="placeholder">
+    <input :type="type" class="w-full p-1 rounded border" :id="id" :placeholder="placeholder" :value="modelValue" @input="modelUpdate($event.target.value)">
 </template>
 
 <script>
+
     export default {
         props:{
             type:{
@@ -15,6 +16,18 @@
             id:{
                 type : String,
                 required : true
+            },
+            modelValue:{
+                type : String,
+            }
+        },
+        setup(_,{ emit }) {
+
+            function modelUpdate(value){
+                emit('update:modelValue',value)
+            }
+            return{
+                modelUpdate
             }
         }
     }

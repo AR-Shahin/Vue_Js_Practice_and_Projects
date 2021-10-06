@@ -11,15 +11,22 @@
             </transition>
         </div>
     </section>
+
+    <AnotherInput v-model="name" class="hidden"/>
 </template>
 
 <script>
+import AnotherInput from "../components/AnotherInput.vue";
     export default {
+        components : {
+            AnotherInput
+        },
         data(){
             return{
                 sliders : ['bg-red-500' , 'bg-yellow-500' , 'bg-green-500'],
                 currentIndex : 0,
-                interval : null
+                interval : null,
+                name : 'shahin'
             }
         },
         mounted(){
