@@ -9,7 +9,9 @@
                 <router-link :to="{name:'mark-down'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Mark Down</router-link>
                  <router-link :to="{name:'slider'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Slider</router-link>
                 <router-link :to="{name:'calculator'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Calculator</router-link>
-                 <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click.prevent="modalOpen">Modal</button>
+                <router-link :to="{name:'slot'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Slot</router-link>
+
+                <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click.prevent="modalOpen">Modal</button>
             </div>
         </div>
         </div>

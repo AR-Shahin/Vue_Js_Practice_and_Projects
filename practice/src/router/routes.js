@@ -25,6 +25,11 @@ const routes = [
         name:'calculator',
         component : () => import('../pages/Calculator')
     },
+    { 
+        path: "/slot",
+        name:'slot',
+        component : () => import('../pages/Slot')
+    },
     {  path: '/:pathMatch(.*)*',
        name: 'NotFound',
        component:  () => import( '../pages/404.vue')
