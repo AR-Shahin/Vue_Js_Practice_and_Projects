@@ -10,9 +10,11 @@
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.2.16",
     "autoprefixer": "^9.8.7",
+    "axios": "^0.22.0",
     "core-js": "^3.6.5",
     "marked": "^1.2.0",
     "postcss": "^7.0.38",
+    "sweetalert2": "^11.1.7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",

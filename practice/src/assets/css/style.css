@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-blue {
+  @apply bg-blue-500 hover:bg-blue-700 text-white rounded py-1 px-3 cursor-pointer;
+}
+.btn {
+  @apply rounded py-1 px-3 cursor-pointer;
+}

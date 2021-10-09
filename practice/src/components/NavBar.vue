@@ -11,7 +11,7 @@
                 <router-link :to="{name:'calculator'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Calculator</router-link>
                 <router-link :to="{name:'slot'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Slot</router-link>
                 <router-link :to="{name:'test'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Test</router-link>
-
+                <router-link :to="{name:'api-todo'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Api Todo</router-link>
                 <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click.prevent="modalOpen">Modal</button>
             </div>
         </div>

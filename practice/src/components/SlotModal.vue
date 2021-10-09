@@ -1,6 +1,6 @@
 <template>
-    <section class="h-full w-full bg-gray-400 opacity-50 fixed top-0 left-0 z-20" @click="fired"></section>
-    <div class="absolute z-30  left-1/2 w-1/3 -translate-x-1/2  transform">
+    <section class="z-20 h-screen w-screen bg-gray-500 fixed top-0 left-0 opacity-50" @click="fired"></section>
+    <div class="absolute  z-30  left-1/2 w-1/3 top-3/5 -translate-x-1/2  transform">
         <div class="bg-white rounded p-3 ">
             <div class="border p-2 rounded">
                 <h1 class="text-center text-3xl"><slot name="heading">Modal</slot></h1>  
@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-</template>inset-0
+</template>
 
 <script>
     export default {

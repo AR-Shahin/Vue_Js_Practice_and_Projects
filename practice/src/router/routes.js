@@ -35,6 +35,11 @@ const routes = [
         name:'test',
         component : () => import('../pages/Test')
     },
+    { 
+        path: "/api-todo",
+        name:'api-todo',
+        component : () => import('../pages/ApiTodo')
+    },
     {  path: '/:pathMatch(.*)*',
        name: 'NotFound',
        component:  () => import( '../pages/404.vue')
