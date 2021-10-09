@@ -36,7 +36,7 @@
                     <th class="border">Date</th>
                     <th class="border">Actions</th>
                 </tr>
-                <tbody class="text-center">
+                <tbody class="text-center" v-if="tasks.length > 0">
                     <tr v-for="(task,index) in tasks" :key="task.key" class="py-2 my-5">
                         <td class="border py-3">{{++index}}</td>
                         <td class="border text-left">{{task.title}}</td>
@@ -47,6 +47,11 @@
                         </td>
                         <td class="border">{{task.format_date}}</td>
                         <td class="border"><span class="text-red-500 rounded cursor-pointer" @click="deleteRow(task.key)"><i class="fa fa-trash-alt"></i></span></td>
+                    </tr>
+                </tbody>
+                <tbody v-else>
+                    <tr>
+                        <td colspan="5" class="text-center"><span class="text-red-500">Not Found!! <i class="fas fa-frown-open"></i></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -84,7 +89,6 @@ import axios from 'axios';
             const todoList = ref([]);
             const path = 'http://127.0.0.1:8000/api';
             const search = ref('');
-
             let tasks =  computed(() => store.getters.getTaskList);
             let links =  computed(() => store.getters.getTaskLinks);
             const addNewTodo = async () => {
@@ -108,11 +112,18 @@ import axios from 'axios';
             onMounted(()=> {
                 fetchAllTodoList();      
             })
-            const searchTask = () => {
-                // tasks = tasks.filter((task) => {
-                //     return task.name === search.value
-                // });
-                 print(tasks)
+            const searchTask = async () => {
+                try{
+                    if(search.value){
+                        const {data:response} = await axios.get(`${path}/task_search/${search.value}`)
+                        store.dispatch('setInitialTasks',response); 
+                    }else{
+                        fetchAllTodoList();
+                    }
+                }catch(err){
+                    print(err)
+                }
+                
             }
             const next = async ()=>{
                 const {data} = await axios.get(links.value.next)

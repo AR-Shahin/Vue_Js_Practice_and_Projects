@@ -25,10 +25,20 @@ export default createStore({
           state.taskList.push(...tasks);
       },
       REMOVE_TASK(state,payload){
+        // Option One
         state.taskList
         .splice(state.taskList.
             findIndex((task) => task.key === payload), 1);
+        // Option two
+        // let temp = [];
+        // for(let i = 0;i<state.taskList.length;i++){
+        //     if(state.taskList[i].key !== payload){
+        //         temp.push(state.taskList[i])
+        //     }
+        // }
+        // state.taskList = [...temp];
       }
+
   },
   actions: {
       addNewTodo ({commit},payload){
