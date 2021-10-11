@@ -5,10 +5,28 @@
                 <form action="" @submit.prevent="addNewTodo">
                     <div class="my-3">
                         <label for="">Title :</label>
-                        <Input placeholder="Enter new Todo" id="title" v-model="todo"/>
+                        <Input placeholder="Enter new Todo" id="title" v-model="todo" :class="{'border-red-600' : isError}"/>
+                        <span class="text-red-500 text-bold my-2" v-if="isError">{{ isError }}</span>
                     </div>
                     <div class="my-3">
                         <button class="btn w-full bg-green-500">Submit</button>
+                    </div>
+                </form>
+            </template>
+        </slot-modal>
+        <!-- Update -->
+        <slot-modal v-if="isUpdateModal" @close-slot-modal="isUpdateModal = !isUpdateModal">
+            <template #heading>Edit Task</template>
+            <template #body>
+                <form action="" @submit.prevent="updateTask">
+                    <div class="my-3">
+                        <label for="">Title :</label>
+                        <Input placeholder="Enter new Todo" id="title" v-model="editTask" :class="{'border-red-600' : isError}" />
+                        <span class="text-red-500 text-bold my-2" v-if="isError">{{ isError }}</span>
+                        <input v-model="editId" type="hidden">
+                    </div>
+                    <div class="my-3">
+                        <button class="btn w-full bg-green-500">Update</button>
                     </div>
                 </form>
             </template>
@@ -45,8 +63,13 @@
                                 {{task.status == 1 ? 'Active' : 'Inactive'}}
                             </span>
                         </td>
-                        <td class="border">{{task.format_date}}</td>
-                        <td class="border"><span class="text-red-500 rounded cursor-pointer" @click="deleteRow(task.key)"><i class="fa fa-trash-alt"></i></span></td>
+                        <td class="border">{{task.format_date}} {{task.status}}</td>
+                        <td class="border">
+                            <button @click="inactiveTask(task.key)" v-if="task.status" class="btn text-purple-500"><i class="fa fa-angle-down"></i></button>
+                            <button v-if="!task.status" class="btn text-pink-500"><i class="fa fa-angle-up" @click="activeTask(task.key)"></i></button>
+                            <button class="btn text-green-500" @click="updateRow(task.key)"><i class="fa fa-edit"></i></button>
+                            <span class="text-red-500 rounded cursor-pointer " @click="deleteRow(task.key)"><i class="fa fa-trash-alt"></i></span>
+                        </td>
                     </tr>
                 </tbody>
                 <tbody v-else>
@@ -89,8 +112,13 @@ import axios from 'axios';
             const todoList = ref([]);
             const path = 'http://127.0.0.1:8000/api';
             const search = ref('');
+            const isError = ref("");
+            const isUpdateModal = ref(false);
+            const editId = ref(null);
+            const editTask = ref("")
             let tasks =  computed(() => store.getters.getTaskList);
             let links =  computed(() => store.getters.getTaskLinks);
+            let showSingleTask = computed(()=> store.getters.getSingleTask);
             const addNewTodo = async () => {
                try{
                    const {data:{data}} = await axios.post(`${path}/task`,{
@@ -99,9 +127,10 @@ import axios from 'axios';
                 store.dispatch('addNewTodo',data);
                 todo.value = "";
                 isModalOpen.value = false;
+                isError.value = ""
                }catch(err){
                   if(err.response.data.errors.name){
-                        alert(err.response.data.errors.name[0])
+                        isError.value = (err.response.data.errors.name[0])
                     }
                }
             }
@@ -110,7 +139,7 @@ import axios from 'axios';
                 store.dispatch('setInitialTasks',data);
             }
             onMounted(()=> {
-                fetchAllTodoList();      
+                fetchAllTodoList();     
             })
             const searchTask = async () => {
                 try{
@@ -134,7 +163,6 @@ import axios from 'axios';
                 store.dispatch('setInitialTasks',data);
             }
             const deleteRow = async (id) => {
-                
                 try{
                     await axios.delete(`${path}/task/${id}`);
                     store.dispatch('removeTask',id);
@@ -146,9 +174,45 @@ import axios from 'axios';
                     print(err)
                 }
             }
+
+            const activeTask = (id) => {
+                axios.post(`${path}/task_active/${id}`)
+                store.dispatch('activeTask',id);
+            }
+            const inactiveTask = (id) => {
+                axios.post(`${path}/task_inactive/${id}`)
+                store.dispatch('inactiveTask',id);
+            }
+
+            const updateRow = (id) => {
+                store.dispatch('getSingleTask',id);
+                isUpdateModal.value = true;
+                editTask.value = showSingleTask.value.title
+                editId.value  =  showSingleTask.value.key
+            }
+            const updateTask = async () => {
+                try{
+                    const response = await axios.put(`${path}/task/${editId.value}`,{
+                        name : editTask.value
+                    });
+                    isUpdateModal.value = false;
+                    let {data:{message}} =response
+                    sweetSuccessMessage(message);
+                    const {data:{data:task}} = response;
+
+                    store.dispatch('updateTask',{
+                        key : editId.value,
+                        task
+                    });
+                }catch(err){
+                     if(err.response.data.errors.name){
+                        isError.value = (err.response.data.errors.name[0])
+                    }
+                }
+            }
             return{
                 isModalOpen,todo,addNewTodo,todoList,print,tasks,search,searchTask,links,next,prev,
-                deleteRow
+                deleteRow,isError,activeTask,inactiveTask,isUpdateModal,updateRow,showSingleTask,editId,editTask,updateTask
             }
         }
     }

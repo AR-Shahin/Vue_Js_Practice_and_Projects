@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
       taskList : [],
-      taskLinks : {}
+      taskLinks : {},
+      singleTask : {}
   },
   getters :{
     getTaskList(state){
@@ -11,6 +12,9 @@ export default createStore({
     },
     getTaskLinks(state){
         return state.taskLinks;
+    },
+    getSingleTask(state) {
+       return state.singleTask;
     }
   },
   mutations: {
@@ -25,11 +29,9 @@ export default createStore({
           state.taskList.push(...tasks);
       },
       REMOVE_TASK(state,payload){
-        // Option One
         state.taskList
         .splice(state.taskList.
             findIndex((task) => task.key === payload), 1);
-        // Option two
         // let temp = [];
         // for(let i = 0;i<state.taskList.length;i++){
         //     if(state.taskList[i].key !== payload){
@@ -37,7 +39,27 @@ export default createStore({
         //     }
         // }
         // state.taskList = [...temp];
-      }
+      },
+      ACTIVE_TASK(state,payload){
+          let index = state.taskList.
+                findIndex((task) => task.key === payload)
+          state.taskList[index].status = 1
+      },
+      INACTIVE_TASK(state,payload){
+        let index = state.taskList.
+              findIndex((task) => task.key === payload)
+        state.taskList[index].status = 0
+    },
+    SINGLE_TASK(state,payload){
+        let index = state.taskList.
+              findIndex((task) => task.key === payload)
+        state.singleTask = state.taskList[index];
+    },
+    UPDATE_TASK(state,payload){
+        state.taskList
+        .splice(state.taskList.
+            findIndex((task) => task.key === payload.key), 1,payload.task);
+    }
 
   },
   actions: {
@@ -49,7 +71,19 @@ export default createStore({
       },
       removeTask({commit},payload){
         commit('REMOVE_TASK',payload)
-      }
+      },
+      activeTask({commit},payload){
+        commit('ACTIVE_TASK',payload)
+      },
+      inactiveTask({commit},payload){
+        commit('INACTIVE_TASK',payload)
+     },
+     getSingleTask({commit},payload){
+        commit('SINGLE_TASK',payload)
+     },
+     updateTask({commit},payload){
+        commit('UPDATE_TASK',payload);
+     }
   },
   modules: {
   }
