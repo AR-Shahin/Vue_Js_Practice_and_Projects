@@ -1,4 +1,5 @@
 <template>
+<loader v-if="isLoader"/>
  <NavBar @login-modal-open="isModalOpen = !isModalOpen" @register-modal-open="toggleRegisterModal = !toggleRegisterModal"></NavBar>
     <RegisterModal v-if="toggleRegisterModal" @close-slot-modal="toggleRegisterModal = !toggleRegisterModal">
         <template #heading>Register</template>
@@ -14,7 +15,7 @@
                         </div>
                         <div class="my-2">
                             <label for="">Image : </label>
-                            <InputElement type="file" id="image" />
+                            <InputElement type="file" id="image" @change="handleImage"/>
                         </div>
                         <div class="my-2">
                             <label for="">Password : </label>
@@ -45,21 +46,22 @@ import Modal from './components/Modal.vue'
 import RegisterModal from './components/SlotModal.vue';
 import InputElement from "./components/Input.vue";
 import Auth from "./services/api/auth";
-import { ref } from '@vue/reactivity';
-
+import { computed, ref } from '@vue/reactivity';
+import Loader from './components/Loader.vue';
+import {useStore} from "vuex"
 export default {
   name: 'App',
   components: {
-    NavBar,Modal,RegisterModal,InputElement
+    NavBar,Modal,RegisterModal,InputElement,Loader
   },
-  setup(){
-    
+     setup(){
+         const store = useStore();
       const isModalOpen = ref(false);
-      const {Register,newUser,toggleRegisterModal} = Auth();
-    
-
+      const {Register,newUser,toggleRegisterModal,handleImage} = Auth();
+     const isLoader = computed(() => store.getters.getLoader)
+        
       return{
-        toggleRegisterModal,isModalOpen,Register,newUser
+        toggleRegisterModal,isModalOpen,Register,newUser,handleImage,isLoader
       }
   }
 }

@@ -7,7 +7,7 @@ const store =  createStore({
       singleTask : {},
       authToken : null,
       authUser: {},
-      bal : 123
+      isLoader : false
   },
   getters :{
     getTaskList(state){
@@ -25,8 +25,8 @@ const store =  createStore({
     getAuthUser(state){
         state.authUser 
     },
-    getBal (state){
-        return state.bal;
+    getLoader (state){
+        return state.isLoader;
     }
    
   },
@@ -78,6 +78,9 @@ const store =  createStore({
     },
     SET_AUTH_TOKEN(state,payload){
         state.authUser = payload
+    },
+    TOGGLE_LOADER(state,payload){
+        state.isLoader = payload;
     }
 
   },
@@ -108,6 +111,9 @@ const store =  createStore({
      },
      setAuthUser({commit},payload){
         commit('SET_AUTH_TOKEN',payload)
+     },
+     toggleLoader({commit},payload){
+        commit('TOGGLE_LOADER',payload);
      }
   },
   modules: {

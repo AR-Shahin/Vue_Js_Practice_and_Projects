@@ -1,4 +1,5 @@
 import Helper from "../../utilities/composables/Helper"
+import ImageUploadComposable from "../../utilities/composables/imageUpload"
 import Api from "./Api";
 import { reactive , ref} from '@vue/reactivity';
 import store from "../../store";
@@ -8,7 +9,9 @@ const newUser = reactive({
     name:'',
     email : "",
     password : '',
-    password_confirmation : ''
+    password_confirmation : '',
+    image : '',
+    errors : {}
 });
 const userLogin = reactive({
     email:'',
@@ -18,7 +21,8 @@ const userLogin = reactive({
 const Auth = () => {
 
     const {print} = Helper();
-
+    const { handleImage,imageFile } = ImageUploadComposable();
+   
     const Login = async () => {
         try{
            // store.state.authToken = null
@@ -39,15 +43,36 @@ const Auth = () => {
     }
 
     const Register = async () => {
-        const {data} = await Api.post(`register`,newUser)
-        const {data:{token}} = data;
-        store.dispatch('setAuthToken',token)
-        toggleRegisterModal.value = false;
-        router.push({name:'calculator'})
+        newUser.image = imageFile.value
+        const formData = new FormData();
+        formData.append('name',newUser.name);
+        formData.append('email',newUser.email);
+        formData.append('password',newUser.password);
+        formData.append('password_confirmation',newUser.password_confirmation);
+        formData.append('image',newUser.image);
+        try{
+            store.dispatch('toggleLoader',true)
+            const {data} = await Api.post(`register`,formData)
+            const {data:{token}} = data;
+            store.dispatch('setAuthToken',token)
+            newUser.name = '';
+            newUser.email = '';
+            newUser.password = '';
+            newUser.password_confirmation = '';
+            imageFile.value = '';
+            toggleRegisterModal.value = false;
+            router.push({name:'calculator'})
+        }catch(err){
+            store.dispatch('toggleLoader',false)
+            print(err)
+        }finally{
+            store.dispatch('toggleLoader',false)
+        }
     }
 
     return {
-        Login,Register,newUser,toggleRegisterModal,print,userLogin
+        Login,Register,newUser,toggleRegisterModal,print,userLogin,
+        handleImage,imageFile
     }
 }
 
