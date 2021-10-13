@@ -46,6 +46,7 @@
                 <span class="bg-green-900 p-2 rounded-r text-white flex items-center">Search <i class="fa fa-search mx-2"></i></span>
             </div>
             <div >
+                {{ authToken }}
                 <table class="w-full border" style="min-height:250px">
                 <tr>
                     <th class="border py-3">SL</th>
@@ -116,6 +117,7 @@ import axios from 'axios';
             const isUpdateModal = ref(false);
             const editId = ref(null);
             const editTask = ref("")
+            const authToken = computed(() => store.getters.authToken)
             let tasks =  computed(() => store.getters.getTaskList);
             let links =  computed(() => store.getters.getTaskLinks);
             let showSingleTask = computed(()=> store.getters.getSingleTask);
@@ -212,7 +214,7 @@ import axios from 'axios';
             }
             return{
                 isModalOpen,todo,addNewTodo,todoList,print,tasks,search,searchTask,links,next,prev,
-                deleteRow,isError,activeTask,inactiveTask,isUpdateModal,updateRow,showSingleTask,editId,editTask,updateTask
+                deleteRow,isError,activeTask,inactiveTask,isUpdateModal,updateRow,showSingleTask,editId,editTask,updateTask,authToken
             }
         }
     }

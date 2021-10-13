@@ -84,10 +84,12 @@
 </template>
 
 <script>
+// import {useStore} from 'vuex';
 import { ref } from '@vue/reactivity'
 import { onMounted, onUnmounted } from '@vue/runtime-core';
     export default {
         setup(){
+                //  const store = useStore();
             const currentNum = ref('');
             const previosNum = ref('');
             const operation = ref('');
@@ -135,8 +137,10 @@ import { onMounted, onUnmounted } from '@vue/runtime-core';
                     currentNum.value = currentNum.value.substring(0,currentNum.value.length - 1)
                 }
             }
+            //   console.log(store.getters.getAuthToken)
         onMounted(() => {
             window.addEventListener("keydown",handleKeyDown);
+            // console.log(store.getters.getAuthToken)
         })
        onUnmounted(() => {
            window.removeEventListener("keydown",handleKeyDown);

@@ -1,10 +1,13 @@
 import { createStore } from 'vuex'
 
-export default createStore({
+const store =  createStore({
   state: {
       taskList : [],
       taskLinks : {},
-      singleTask : {}
+      singleTask : {},
+      authToken : null,
+      authUser: {},
+      bal : 123
   },
   getters :{
     getTaskList(state){
@@ -15,7 +18,17 @@ export default createStore({
     },
     getSingleTask(state) {
        return state.singleTask;
+    },
+    getAuthToken(state){
+        return state.authToken
+    },
+    getAuthUser(state){
+        state.authUser 
+    },
+    getBal (state){
+        return state.bal;
     }
+   
   },
   mutations: {
       SET_NEW_TODO(state,payload){
@@ -59,6 +72,12 @@ export default createStore({
         state.taskList
         .splice(state.taskList.
             findIndex((task) => task.key === payload.key), 1,payload.task);
+    },
+    API_TOKEN(state,token){
+        state.authToken = token
+    },
+    SET_AUTH_TOKEN(state,payload){
+        state.authUser = payload
     }
 
   },
@@ -83,8 +102,16 @@ export default createStore({
      },
      updateTask({commit},payload){
         commit('UPDATE_TASK',payload);
+     },
+     setAuthToken({commit},payload){
+        commit('API_TOKEN',payload)
+     },
+     setAuthUser({commit},payload){
+        commit('SET_AUTH_TOKEN',payload)
      }
   },
   modules: {
   }
 })
+
+export default store
