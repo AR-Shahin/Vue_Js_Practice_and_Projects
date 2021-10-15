@@ -61,7 +61,7 @@ const Auth = () => {
             router.push({name:'calculator'})
         }catch(err){
             store.dispatch('toggleLoader',false);
-            console.log('afain');
+            //console.log('afain');
             if(err.response.data.errors.name){
                 newUser.errors.name = (err.response.data.errors.name[0])
             }
@@ -85,8 +85,7 @@ const Auth = () => {
     const Logout = async () => {
        try{
            await Api.post('logout');
-           store.dispatch('setAuthToken',"");
-           store.dispatch('setAuthUser',"");
+           store.dispatch('logout');
            router.push({name:'slider'})
        }catch(err){
            print(err)

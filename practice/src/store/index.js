@@ -75,6 +75,13 @@ const store =  createStore({
     },
     API_TOKEN(state,token){
         state.authToken = token
+        token = JSON.stringify(token)
+        localStorage.setItem('token',token)
+    },
+    LOGOUT(state){
+        state.authToken = null;
+        state.authUser = {};
+        localStorage.setItem('token','');
     },
     SET_AUTH_TOKEN(state,payload){
         state.authUser = payload
@@ -114,6 +121,9 @@ const store =  createStore({
      },
      toggleLoader({commit},payload){
         commit('TOGGLE_LOADER',payload);
+     },
+     logout({commit}){
+         commit('LOGOUT')
      }
   },
   modules: {

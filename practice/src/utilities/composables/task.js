@@ -18,7 +18,7 @@ const Task = () => {
     const fetchAllTodoList = async () => {
        try{
             store.dispatch('toggleLoader',true);
-            const {data} = await Api.get('task')
+            const {data} = await Api.get('task');
             store.dispatch('setInitialTasks',data);
        }catch(err){
             store.dispatch('toggleLoader',false);
