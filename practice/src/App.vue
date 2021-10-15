@@ -8,22 +8,27 @@
                         <div class="my-2">
                             <label for="">Username : </label>
                             <InputElement  id="userName" placeholder="Enter Your Username" v-model="newUser.name" />
+                            <span class="text-red-500" v-if="newUser.errors.name">{{newUser.errors.name}}</span>
                         </div>
                         <div class="my-2">
                             <label for="">Email : </label>
                             <InputElement type="email" id="email" placeholder="Enter Your Email" v-model="newUser.email"/>
+                            <span class="text-red-500" v-if="newUser.errors.email">{{newUser.errors.email}}</span>
                         </div>
                         <div class="my-2">
                             <label for="">Image : </label>
                             <InputElement type="file" id="image" @change="handleImage"/>
+                            <span class="text-red-500" v-if="newUser.errors.image">{{newUser.errors.image}}</span>
                         </div>
                         <div class="my-2">
                             <label for="">Password : </label>
                             <InputElement type="password" id="password" placeholder="Enter Your Password" v-model="newUser.password"/>
+                            <span class="text-red-500" v-if="newUser.errors.password">{{newUser.errors.password}}</span>
                         </div>
                         <div class="my-2">
                             <label for="">Confirm Password : </label>
                             <InputElement type="password" id="confirm_password" placeholder="Enter Password Again" v-model="newUser.password_confirmation"/>
+                            <span class="text-red-500" v-if="newUser.errors.password_confirmation">{{newUser.errors.password_confirmation}}</span>
                         </div>
                         <div class="my-2">
                             <button type="submit" class="py-1 px-5 bg-yellow-500 rounded w-full">Register</button>
@@ -55,10 +60,10 @@ export default {
     NavBar,Modal,RegisterModal,InputElement,Loader
   },
      setup(){
-         const store = useStore();
-      const isModalOpen = ref(false);
-      const {Register,newUser,toggleRegisterModal,handleImage} = Auth();
-     const isLoader = computed(() => store.getters.getLoader)
+        const store = useStore();
+        const isModalOpen = ref(false);
+        const {Register,newUser,toggleRegisterModal,handleImage} = Auth();
+        const isLoader = computed(() => store.getters.getLoader)
         
       return{
         toggleRegisterModal,isModalOpen,Register,newUser,handleImage,isLoader

@@ -8,12 +8,14 @@ const routes = [
     { 
         path: "/todo",
         name:'todo',
-        component : () => import(/* webpackChunkName: "todo" */ '../pages/ToDo')
+        component : () => import(/* webpackChunkName: "todo" */ '../pages/ToDo'),
+        meta: {auth:true}
     },
     { 
         path: "/mark-down",
         name:'mark-down',
-        component : () => import(/* webpackChunkName: "mark-down" */ '../pages/MarkDown')
+        component : () => import(/* webpackChunkName: "mark-down" */ '../pages/MarkDown'),
+        meta: {auth:true}
     },
     { 
         path: "/slider",
@@ -28,7 +30,8 @@ const routes = [
     { 
         path: "/slot",
         name:'slot',
-        component : () => import('../pages/Slot')
+        component : () => import('../pages/Slot'),
+        meta: {auth:true}
     },
     { 
         path: "/test",
@@ -38,7 +41,8 @@ const routes = [
     { 
         path: "/api-todo",
         name:'api-todo',
-        component : () => import('../pages/ApiTodo')
+        component : () => import('../pages/ApiTodo'),
+        meta: {auth:true}
     },
     {  path: '/:pathMatch(.*)*',
        name: 'NotFound',

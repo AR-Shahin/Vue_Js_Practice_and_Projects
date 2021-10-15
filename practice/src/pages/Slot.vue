@@ -78,7 +78,7 @@ import Helpler from "../utilities/composables/Helper";
                print(pay)
             }
             function submitRegisterForm(){
-                print()
+               
             }
             return{
                 isLoginModal,openLoginModal,isRegisterModal,openRegisterModal,userName,email,submitLoginForm,test,submitRegisterForm

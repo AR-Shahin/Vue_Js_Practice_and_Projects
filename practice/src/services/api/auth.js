@@ -3,7 +3,8 @@ import ImageUploadComposable from "../../utilities/composables/imageUpload"
 import Api from "./Api";
 import { reactive , ref} from '@vue/reactivity';
 import store from "../../store";
-import router from "../../router";
+// import router from "../../router";
+import { useRouter } from 'vue-router'
 const toggleRegisterModal = ref(false);
 const newUser = reactive({
     name:'',
@@ -19,13 +20,12 @@ const userLogin = reactive({
     errors : {},
 });
 const Auth = () => {
-
-    const {print} = Helper();
+    const router = useRouter();
+    const {print,emptyObjectProperty} = Helper();
     const { handleImage,imageFile } = ImageUploadComposable();
    
     const Login = async () => {
         try{
-           // store.state.authToken = null
             const {data} = await Api.post('login',userLogin);
             const {data:{user}} = data;
             const {data:{token}} = data;
@@ -51,28 +51,50 @@ const Auth = () => {
         formData.append('password_confirmation',newUser.password_confirmation);
         formData.append('image',newUser.image);
         try{
-            store.dispatch('toggleLoader',true)
+            store.dispatch('toggleLoader',true);
+            emptyObjectProperty(newUser.errors)
             const {data} = await Api.post(`register`,formData)
             const {data:{token}} = data;
             store.dispatch('setAuthToken',token)
-            newUser.name = '';
-            newUser.email = '';
-            newUser.password = '';
-            newUser.password_confirmation = '';
-            imageFile.value = '';
             toggleRegisterModal.value = false;
+            emptyObjectProperty(newUser)
             router.push({name:'calculator'})
         }catch(err){
-            store.dispatch('toggleLoader',false)
-            print(err)
+            store.dispatch('toggleLoader',false);
+            console.log('afain');
+            if(err.response.data.errors.name){
+                newUser.errors.name = (err.response.data.errors.name[0])
+            }
+            if(err.response.data.errors.email){
+                newUser.errors.email = (err.response.data.errors.email[0])
+            }
+            if(err.response.data.errors.password){
+                newUser.errors.password = (err.response.data.errors.password[0])
+            }
+            if(err.response.data.errors.password_confirmation){
+                newUser.errors.password_confirmation = (err.response.data.errors.password_confirmation[0])
+            }
+            if(err.response.data.errors.image){
+                newUser.errors.image = (err.response.data.errors.image[0])
+            }
         }finally{
             store.dispatch('toggleLoader',false)
         }
     }
 
+    const Logout = async () => {
+       try{
+           await Api.post('logout');
+           store.dispatch('setAuthToken',"");
+           store.dispatch('setAuthUser',"");
+           router.push({name:'slider'})
+       }catch(err){
+           print(err)
+       }
+    }
     return {
         Login,Register,newUser,toggleRegisterModal,print,userLogin,
-        handleImage,imageFile
+        handleImage,imageFile,Logout
     }
 }
 

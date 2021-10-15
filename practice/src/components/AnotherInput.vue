@@ -17,7 +17,7 @@
             }
         },
         created(){
-            console.log(this.$props.value)
+            // console.log(this.$props.value)
         }
     }
 </script>
