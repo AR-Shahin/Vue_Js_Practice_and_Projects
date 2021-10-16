@@ -15,7 +15,7 @@
              <div class="self-center">
                  <span class="block">Quantity : <span class="text-blue-800">{{product.quantity}}</span></span>
              </div>
-             <button class="btn bg-purple-800  text-white">Add To Cart</button>
+             <button class="btn bg-purple-800 text-white" @click="addToCart(product)">Add To Cart</button>
             </div>
             <p class="mt-2">{{product.des}}</p>
         </div>
@@ -27,13 +27,15 @@ import { computed, onMounted } from '@vue/runtime-core';
 import {useRoute} from 'vue-router';
 import ProductComposable from "../utilities/composables/Product"
 import store from '../store';
+import Cart from "../utilities/composables/Cart"
     export default {
         setup(){
             const route = useRoute();
             const {singleProduct} = ProductComposable();
+            const {addToCart} = Cart();
 
-            const isProduct = computed(() => store.getters.getIsProductFound)
-            const product = computed(() => store.getters.getSingleProduct)
+            const isProduct = computed(() => store.getters.getIsProductFound);
+            const product = computed(() => store.getters.getSingleProduct);
             onMounted(()=> {
                 singleProduct(route.params.slug);
             })
@@ -42,7 +44,7 @@ import store from '../store';
 
 
             return {
-                isProduct,product
+                isProduct,product,addToCart
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-purple-600 py-3 fixed top-0 left-0 right-0">
+    <nav class="bg-purple-600 py-3 fixed top-0 left-0 right-0 z-50">
         <div class="container ">
             <div class="flex justify-between">
             <div><router-link :to="{name:'home'}">Logo {{ authToken}}</router-link>
@@ -18,7 +18,7 @@
                 <router-link :to="{name:'test'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Test</router-link>
                 <router-link :to="{name:'api-todo'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" v-if="authToken">Api Todo</router-link>
                 <router-link :to="{name:'products'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" >Product</router-link>
-                <span @click="tooggleCart" class="bg-indigo-900 text-white rounded p-1 cursor-pointer">Cart : <span class="font-bold">0</span></span>
+                <span @click="tooggleCart" class="bg-indigo-900 text-white rounded p-1 cursor-pointer">Cart : <span class="font-bold">{{cartLenght}}</span></span>
             </div>
         </div>
         </div>
@@ -28,7 +28,7 @@
 <script>
 import { computed } from '@vue/reactivity';
 import {useStore} from 'vuex';
-import Auth from "../services/api/auth"
+import Auth from "../services/api/auth";
     export default {
 
         setup(_,{emit}){
@@ -41,6 +41,7 @@ import Auth from "../services/api/auth"
 
             const authToken = computed(() => store.getters.getAuthToken);
             const isCartOpen = computed(() => store.getters.getIsCart);
+            const cartLenght = computed(() => store.getters.getCartItems.length)
             const tooggleCart = () => {
                 if(!isCartOpen.value){
                     store.dispatch('toggleCart',true)
@@ -49,7 +50,7 @@ import Auth from "../services/api/auth"
                 }
             }
             return {
-                modalOpen,openRegisterModal,authToken,Logout,tooggleCart,isCartOpen
+                modalOpen,openRegisterModal,authToken,Logout,tooggleCart,isCartOpen,cartLenght
             }
         }
     }
