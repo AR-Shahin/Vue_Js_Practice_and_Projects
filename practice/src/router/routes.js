@@ -44,6 +44,11 @@ const routes = [
         component : () => import('../pages/ApiTodo'),
         meta: {auth:true}
     },
+    { 
+        path: "/products",
+        name:'products',
+        component : () => import('../pages/Products'),
+    },
     {  path: '/:pathMatch(.*)*',
        name: 'NotFound',
        component:  () => import( '../pages/404.vue')

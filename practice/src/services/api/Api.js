@@ -1,7 +1,7 @@
 import axios from "axios";
-// import store from "../../store/index";
+//  import store from "../../store/index";
 
-// alert(store.getters.getAuthToken)
+//  alert(store)
 
 // console.log(store.getters.getAuthToken)
 const Api = axios.create({
@@ -10,7 +10,8 @@ const Api = axios.create({
         'Accept' : 'application/json',
         'Content-Type' : 'application/json',
         // 'Authorization' : "Bearer " + store.getters.getAuthToken 
-        'Authorization' : "Bearer " + JSON.parse(localStorage.getItem('token'))
+        // 'Authorization' : "Bearer " + JSON.parse(localStorage.getItem('token'))
+        'Authorization' : localStorage.getItem('token') ? "Bearer " + JSON.parse(localStorage.getItem('token')) : ''
     }
 })
 
