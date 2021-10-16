@@ -7,7 +7,10 @@ const store =  createStore({
       singleTask : {},
       authToken : null,
       authUser: {},
-      isLoader : false
+      isLoader : false,
+      products : [],
+      product : {},
+      isProductFound : false
   },
   getters :{
     getTaskList(state){
@@ -27,6 +30,15 @@ const store =  createStore({
     },
     getLoader (state){
         return state.isLoader;
+    },
+    getAllProducts(state){
+        return state.products
+    },
+    getSingleProduct(state){
+        return state.product
+    },
+    getIsProductFound(state){
+        return state.isProductFound
     }
    
   },
@@ -88,6 +100,15 @@ const store =  createStore({
     },
     TOGGLE_LOADER(state,payload){
         state.isLoader = payload;
+    },
+    SET_ALL_PRODUCT(state,payload){
+        state.products.push(...payload)
+    },
+    SET_SINGLE_PRODUCT(state,payload){
+        state.product = payload
+    },
+    SET_PRODUCT_FOUND_OR_NOT(state,payload){
+        state.isProductFound = payload
     }
 
   },
@@ -124,7 +145,17 @@ const store =  createStore({
      },
      logout({commit}){
          commit('LOGOUT')
+     },
+     setAllProduct({commit},payload){
+        commit('SET_ALL_PRODUCT',payload)
+     },
+     setSingleProduct({commit},payload){
+        commit('SET_SINGLE_PRODUCT',payload)
+     },
+     setIsProductFound({commit},payload){
+        commit('SET_PRODUCT_FOUND_OR_NOT',payload)
      }
+     
   },
   modules: {
   }
