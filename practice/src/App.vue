@@ -36,11 +36,13 @@
                     </form>
                 </template>
     </RegisterModal>
-    <div class="container mt-5">
+    <div class="container mt-20">
         <router-view></router-view>
     </div>
     <teleport to='body'>
     <Modal v-if="isModalOpen" @close-modal="isModalOpen = !isModalOpen"/>
+    <Cart v-if="false"/>
+    <Notification/>
     </teleport>
 </template>
 
@@ -51,13 +53,15 @@ import Modal from './components/Modal.vue'
 import RegisterModal from './components/SlotModal.vue';
 import InputElement from "./components/Input.vue";
 import Auth from "./services/api/auth";
+import Cart from './components/Cart.vue';
+import Notification from './components/Notification.vue';
 import { computed, ref } from '@vue/reactivity';
 import Loader from './components/Loader.vue';
 import {useStore} from "vuex"
 export default {
   name: 'App',
   components: {
-    NavBar,Modal,RegisterModal,InputElement,Loader
+    NavBar,Modal,RegisterModal,InputElement,Loader,Cart,Notification
   },
      setup(){
         const store = useStore();

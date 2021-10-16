@@ -1,6 +1,6 @@
 <template>
-    <nav class="bg-purple-600 py-3">
-        <div class="container">
+    <nav class="bg-purple-600 py-3 fixed top-0 left-0 right-0">
+        <div class="container ">
             <div class="flex justify-between">
             <div><router-link :to="{name:'home'}">Logo {{ authToken}}</router-link>
             <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click.prevent="modalOpen" v-if="!authToken" >Login</button>
