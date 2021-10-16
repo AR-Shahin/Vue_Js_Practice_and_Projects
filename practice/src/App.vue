@@ -41,7 +41,9 @@
     </div>
     <teleport to='body'>
     <Modal v-if="isModalOpen" @close-modal="isModalOpen = !isModalOpen"/>
-    <Cart v-if="false"/>
+    <div v-if="isCartOpen">
+        <Cart/>
+    </div>
     <Notification/>
     </teleport>
 </template>
@@ -68,14 +70,14 @@ export default {
         const isModalOpen = ref(false);
         const {Register,newUser,toggleRegisterModal,handleImage} = Auth();
         const isLoader = computed(() => store.getters.getLoader)
-        
+         const isCartOpen = computed(() => store.getters.getIsCart);
       return{
-        toggleRegisterModal,isModalOpen,Register,newUser,handleImage,isLoader
+        toggleRegisterModal,isModalOpen,Register,newUser,handleImage,isLoader,isCartOpen
       }
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

@@ -18,7 +18,7 @@
                 <router-link :to="{name:'test'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white">Test</router-link>
                 <router-link :to="{name:'api-todo'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" v-if="authToken">Api Todo</router-link>
                 <router-link :to="{name:'products'}" class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" >Product</router-link>
-                <span class="bg-indigo-900 text-white rounded p-1 cursor-pointer">Cart : <span class="font-bold">0</span></span>
+                <span @click="tooggleCart" class="bg-indigo-900 text-white rounded p-1 cursor-pointer">Cart : <span class="font-bold">0</span></span>
             </div>
         </div>
         </div>
@@ -40,10 +40,16 @@ import Auth from "../services/api/auth"
             const openRegisterModal = () => emit('register-modal-open');
 
             const authToken = computed(() => store.getters.getAuthToken);
-
-          
+            const isCartOpen = computed(() => store.getters.getIsCart);
+            const tooggleCart = () => {
+                if(!isCartOpen.value){
+                    store.dispatch('toggleCart',true)
+                }else{
+                    store.dispatch('toggleCart',false)
+                }
+            }
             return {
-                modalOpen,openRegisterModal,authToken,Logout
+                modalOpen,openRegisterModal,authToken,Logout,tooggleCart,isCartOpen
             }
         }
     }

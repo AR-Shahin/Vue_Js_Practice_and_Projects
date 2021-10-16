@@ -5,7 +5,7 @@
             <h2 class="text-center text-red-500">Product Not Found!</h2>
         </div>
         <div class="mt-3 w-1/3 bg-blue-100 p-3 rounded m-auto" v-else >
-            <img :src="prodtct.image" alt="" class="w-full">
+            <img :src="product.image" alt="" class="w-full">
             <h2 class="text-2xl cursor-pointer my-2">{{product.name}}</h2>
             <div class="flex justify-between my-2">
                 <span class="block">Price : <span class="text-blue-800">${{product.price}}</span></span>

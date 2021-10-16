@@ -10,7 +10,9 @@ const store =  createStore({
       isLoader : false,
       products : [],
       product : {},
-      isProductFound : false
+      isProductFound : false,
+      isCartOpen : false,
+      cart : []
   },
   getters :{
     getTaskList(state){
@@ -39,7 +41,10 @@ const store =  createStore({
     },
     getIsProductFound(state){
         return state.isProductFound
-    }
+    },
+    getIsCart (state){
+        return state.isCartOpen;
+    },
    
   },
   mutations: {
@@ -109,7 +114,10 @@ const store =  createStore({
     },
     SET_PRODUCT_FOUND_OR_NOT(state,payload){
         state.isProductFound = payload
-    }
+    },
+    TOGGLE_CART(state,payload){
+        state.isCartOpen = payload;
+    },
 
   },
   actions: {
@@ -154,7 +162,10 @@ const store =  createStore({
      },
      setIsProductFound({commit},payload){
         commit('SET_PRODUCT_FOUND_OR_NOT',payload)
-     }
+     },
+     toggleCart({commit},payload){
+        commit('TOGGLE_CART',payload);
+     },
      
   },
   modules: {
