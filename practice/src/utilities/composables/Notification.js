@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import store from "../../store/index";
 
 const Notification = () => {
 
@@ -10,10 +11,12 @@ const Notification = () => {
           })
     }
 
-
+    const removeNotificationByClick = (id) =>{
+        store.dispatch('notification/removeNotificationByClick',id);
+    }
 
     return {
-        sweetSuccessMessage
+        sweetSuccessMessage,removeNotificationByClick
     }
 }
 export default Notification;

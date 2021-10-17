@@ -15,7 +15,7 @@ import NotifyContent from "./NotifiContent.vue"
         },
         setup(){
             const store = useStore()
-            const notificaitons = computed(()=> store.getters.getNotifications)
+            const notificaitons = computed(()=> store.getters['notification/getNotifications'])
             return{
 notificaitons
             }
