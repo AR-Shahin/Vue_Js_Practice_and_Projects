@@ -39,9 +39,9 @@ import Cart from "../utilities/composables/Cart"
         setup(){
             const store = useStore();
             const {removeFromCart,clearCart} = Cart();
-            const carts = computed(() => store.getters.getCartItems)
+            const carts = computed(() => store.getters['cart/getCartItems'])
             // console.log(carts.value)
-            const cartLenght = computed(() => store.getters.getCartItems.length)
+            const cartLenght = computed(() => store.getters['cart/getCartItems'].length)
             return{
                 carts,cartLenght,removeFromCart,clearCart
             }

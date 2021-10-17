@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-
+import cart from './cart';
 const store =  createStore({
   state: {
       taskList : [],
@@ -11,19 +11,7 @@ const store =  createStore({
       products : [],
       product : {},
       isProductFound : false,
-      isCartOpen : false,
-      cart : [
-    //       {
-    //       product:{
-    //          sell_price:100,
-    //           id:5,
-    //           name:'lorsem',
-    //           image:'dsdd',
-    //       },
-    //       quantity : 5
-          
-    //   }
-    ],
+  
     notifications : [
         // {
         //     type: 'Success',
@@ -69,15 +57,7 @@ const store =  createStore({
     getIsProductFound(state){
         return state.isProductFound
     },
-    getIsCart (state){
-        return state.isCartOpen;
-    },
-    getCartItems(state) {
-        return state.cart
-    },
-    cartLength(state){
-       return state.cart.length
-    },
+   
     getNotifications(state) {
         return state.notifications
     },
@@ -151,30 +131,7 @@ const store =  createStore({
     SET_PRODUCT_FOUND_OR_NOT(state,payload){
         state.isProductFound = payload
     },
-    TOGGLE_CART(state,payload){
-        //console.log(payload)
-        state.isCartOpen = payload;
-    },
-    ADD_TO_CART(state,payload){
-        //console.log(typeof payload)
-        let oldProduct = state.cart.find((item) => item.product.id == payload.id);
-        if(oldProduct){
-            console.log(oldProduct.product.price)
-            oldProduct.quantity ++ 
-        }else{
-            state.cart.push({product:payload,quantity : 1})
-        }
-        
-        //console.log({product:payload,quantity : 1})
-    },
-    REMOVE_FROM_CART(state,payload){
-        state.cart
-        .splice(state.cart.
-            findIndex((item) => item.product.id === payload.id), 1);
-    }
-    ,CLEAR_CART(state){
-        state.cart = []
-    },
+   
     PUSH_NOTIFICATION(state,payload){
         state.notifications.push({
             ...payload,
@@ -231,18 +188,7 @@ const store =  createStore({
      setIsProductFound({commit},payload){
         commit('SET_PRODUCT_FOUND_OR_NOT',payload)
      },
-     toggleCart({commit},payload){
-        commit('TOGGLE_CART',payload);
-     },
-     addToCart({commit},payload){
-        commit('ADD_TO_CART',payload);
-     },
-     removeFromCart({commit},payload){
-        commit('REMOVE_FROM_CART',payload);
-     },
-     clearCart({commit}){
-         commit('CLEAR_CART')
-     },
+     
      pushNotification({commit},payload){
          commit('PUSH_NOTIFICATION',payload)
      },
@@ -252,6 +198,7 @@ const store =  createStore({
      
   },
   modules: {
+    cart
   }
 })
 

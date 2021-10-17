@@ -40,13 +40,13 @@ import Auth from "../services/api/auth";
             const openRegisterModal = () => emit('register-modal-open');
 
             const authToken = computed(() => store.getters.getAuthToken);
-            const isCartOpen = computed(() => store.getters.getIsCart);
-            const cartLenght = computed(() => store.getters.getCartItems.length)
+            const isCartOpen = computed(() => store.getters['cart/getIsCart']);
+            const cartLenght = computed(() => store.getters['cart/getCartItems'].length)
             const tooggleCart = () => {
                 if(!isCartOpen.value){
-                    store.dispatch('toggleCart',true)
+                    store.dispatch('cart/toggleCart',true)
                 }else{
-                    store.dispatch('toggleCart',false)
+                    store.dispatch('cart/toggleCart',false)
                 }
             }
             return {

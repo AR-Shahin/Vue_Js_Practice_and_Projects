@@ -70,7 +70,7 @@ export default {
         const isModalOpen = ref(false);
         const {Register,newUser,toggleRegisterModal,handleImage} = Auth();
         const isLoader = computed(() => store.getters.getLoader)
-         const isCartOpen = computed(() => store.getters.getIsCart);
+         const isCartOpen = computed(() => store.getters['cart/getIsCart']);
       return{
         toggleRegisterModal,isModalOpen,Register,newUser,handleImage,isLoader,isCartOpen
       }

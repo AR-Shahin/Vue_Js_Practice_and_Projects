@@ -8,7 +8,7 @@ const Cart = () => {
 
     const addToCart = (product) => {
        // console.log(product)
-        store.dispatch('addToCart',product);
+        store.dispatch('cart/addToCart',product);
         store.dispatch('pushNotification', {
             type: 'Success',
             class : 'bg-green-600',
@@ -17,7 +17,7 @@ const Cart = () => {
         })
     }
     const removeFromCart = (product) => {
-        store.dispatch('removeFromCart',product);
+        store.dispatch('cart/removeFromCart',product);
         store.dispatch('pushNotification', {
             type: 'Success',
             class : 'bg-red-600',
@@ -27,7 +27,7 @@ const Cart = () => {
     }
 
     const clearCart = () => {
-        store.dispatch('clearCart');
+        store.dispatch('cart/clearCart');
         store.dispatch('pushNotification', {
             type: 'Success',
             class : 'bg-red-600',
