@@ -44,8 +44,8 @@
     <div v-if="isCartOpen">
         <Cart/>
     </div>
-    <Notification/>
     </teleport>
+     <Notification /> 
 </template>
 
 <script>

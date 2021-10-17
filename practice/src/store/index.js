@@ -23,7 +23,23 @@ const store =  createStore({
     //       quantity : 5
           
     //   }
-    ]
+    ],
+    notifications : [
+        // {
+        //     type: 'Success',
+        //     class : 'bg-green-600',
+        //     textClass : 'text-green-600',
+        //     message : 'Successfully Product added !',
+        //     id : 1
+        // },
+        // {
+        //     type: 'Info',
+        //     class : 'bg-yellow-600',
+        //     message : 'Remove From Cart!',
+        //     textClass : 'text-yellow-600',
+        //     id : 3
+        // }
+    ],
   },
   getters :{
     getTaskList(state){
@@ -61,7 +77,10 @@ const store =  createStore({
     },
     cartLength(state){
        return state.cart.length
-    }
+    },
+    getNotifications(state) {
+        return state.notifications
+    },
    
   },
   mutations: {
@@ -155,6 +174,17 @@ const store =  createStore({
     }
     ,CLEAR_CART(state){
         state.cart = []
+    },
+    PUSH_NOTIFICATION(state,payload){
+        state.notifications.push({
+            ...payload,
+            id : (Math.random().toString(36) + Date.now().toString(36)).substr(2)
+        })
+    },
+    REMOVE_NOTIFICATION(state,payload){
+        state.notifications = state.notifications.filter(notification => {
+            return notification.id != payload.id;
+        })
     }
 
   },
@@ -212,7 +242,13 @@ const store =  createStore({
      },
      clearCart({commit}){
          commit('CLEAR_CART')
-     }
+     },
+     pushNotification({commit},payload){
+         commit('PUSH_NOTIFICATION',payload)
+     },
+     removeNotification({commit},payload){
+        commit('REMOVE_NOTIFICATION',payload)
+    }
      
   },
   modules: {

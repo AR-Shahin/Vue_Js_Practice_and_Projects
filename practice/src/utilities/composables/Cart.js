@@ -8,14 +8,32 @@ const Cart = () => {
 
     const addToCart = (product) => {
        // console.log(product)
-        store.dispatch('addToCart',product)
+        store.dispatch('addToCart',product);
+        store.dispatch('pushNotification', {
+            type: 'Success',
+            class : 'bg-green-600',
+            textClass : 'text-green-600',
+            message : 'Product added to Cart !',
+        })
     }
     const removeFromCart = (product) => {
-        store.dispatch('removeFromCart',product)
+        store.dispatch('removeFromCart',product);
+        store.dispatch('pushNotification', {
+            type: 'Success',
+            class : 'bg-red-600',
+            textClass : 'text-red-600',
+            message : 'Product Remove From Cart !',
+        })
     }
 
     const clearCart = () => {
-        store.dispatch('clearCart')
+        store.dispatch('clearCart');
+        store.dispatch('pushNotification', {
+            type: 'Success',
+            class : 'bg-red-600',
+            textClass : 'text-red-600',
+            message : 'Product Remove From Cart !',
+        })
     }
 
     return{
