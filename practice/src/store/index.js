@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import cart from './cart';
 import notification from './modules/notification';
+import product from './modules/product';
 const store =  createStore({
   state: {
       taskList : [],
@@ -9,11 +10,6 @@ const store =  createStore({
       authToken : null,
       authUser: {},
       isLoader : false,
-      products : [],
-      product : {},
-      isProductFound : false,
-  
-  
   },
   getters :{
     getTaskList(state){
@@ -33,21 +29,7 @@ const store =  createStore({
     },
     getLoader (state){
         return state.isLoader;
-    },
-    getAllProducts(state){
-        return state.products
-    },
-    getSingleProduct(state){
-        return state.product
-    },
-    getIsProductFound(state){
-        return state.isProductFound
-    },
-   
-    // getNotifications(state) {
-    //     return state.notifications
-    // },
-   
+    },  
   },
   mutations: {
       SET_NEW_TODO(state,payload){
@@ -57,6 +39,7 @@ const store =  createStore({
           state.taskList = [];
           const {data:{tasks}} = payload;
           const {links} = payload;
+         // console.log(payload)
           state.taskLinks = links;
           state.taskList.push(...tasks);
       },
@@ -108,27 +91,8 @@ const store =  createStore({
     TOGGLE_LOADER(state,payload){
         state.isLoader = payload;
     },
-    SET_ALL_PRODUCT(state,payload){
-        state.products.push(...payload)
-    },
-    SET_SINGLE_PRODUCT(state,payload){
-        state.product = payload
-    },
-    SET_PRODUCT_FOUND_OR_NOT(state,payload){
-        state.isProductFound = payload
-    },
    
-    // PUSH_NOTIFICATION(state,payload){
-    //     state.notifications.push({
-    //         ...payload,
-    //         id : (Math.random().toString(36) + Date.now().toString(36)).substr(2)
-    //     })
-    // },
-    // REMOVE_NOTIFICATION(state,payload){
-    //     state.notifications = state.notifications.filter(notification => {
-    //         return notification.id != payload.id;
-    //     })
-    // }
+   
 
   },
   actions: {
@@ -165,27 +129,15 @@ const store =  createStore({
      logout({commit}){
          commit('LOGOUT')
      },
-     setAllProduct({commit},payload){
-        commit('SET_ALL_PRODUCT',payload)
-     },
-     setSingleProduct({commit},payload){
-        commit('SET_SINGLE_PRODUCT',payload)
-     },
-     setIsProductFound({commit},payload){
-        commit('SET_PRODUCT_FOUND_OR_NOT',payload)
-     },
      
-    //  pushNotification({commit},payload){
-    //      commit('PUSH_NOTIFICATION',payload)
-    //  },
-    //  removeNotification({commit},payload){
-    //     commit('REMOVE_NOTIFICATION',payload)
-    // }
+     
+
      
   },
   modules: {
     cart,
-    notification
+    notification,
+    product
   }
 })
 

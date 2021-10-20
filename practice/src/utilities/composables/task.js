@@ -19,6 +19,7 @@ const Task = () => {
        try{
             store.dispatch('toggleLoader',true);
             const {data} = await Api.get('task');
+           // console.log(data)
             store.dispatch('setInitialTasks',data);
        }catch(err){
             store.dispatch('toggleLoader',false);

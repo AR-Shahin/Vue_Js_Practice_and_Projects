@@ -34,8 +34,8 @@ import Cart from "../utilities/composables/Cart"
             const {singleProduct} = ProductComposable();
             const {addToCart} = Cart();
 
-            const isProduct = computed(() => store.getters.getIsProductFound);
-            const product = computed(() => store.getters.getSingleProduct);
+            const isProduct = computed(() => store.getters['product/getIsProductFound']);
+            const product = computed(() => store.getters['product/getSingleProduct']);
             onMounted(()=> {
                 singleProduct(route.params.slug);
             })

@@ -8,9 +8,9 @@ const Product = () => {
     const getAllProduct = async ()=>{
         try{
             store.dispatch('toggleLoader',true);
-            const {data:products} = await Api.get('product');
-            store.dispatch('setIsProductFound',false);
-            store.dispatch('setAllProduct',products);
+            const data = await Api.get('product');
+            store.dispatch('product/setIsProductFound',false);
+            store.dispatch('product/setAllProduct',data);
         }catch(err){
             store.dispatch('toggleLoader',false);
             print(err)
@@ -22,16 +22,30 @@ const Product = () => {
     const singleProduct = async (slug) => {
         try{
             const {data:product} = await Api.get(`product/${slug}`);
-            store.dispatch('setSingleProduct',product)
-            store.dispatch('setIsProductFound',false)
+            store.dispatch('product/setSingleProduct',product)
+            store.dispatch('product/setIsProductFound',false)
         }catch(err){
-            store.dispatch('setIsProductFound',true)
+            store.dispatch('product/setIsProductFound',true)
             print(err)
         }
     }
 
 
-
+    const pagination = async (url) => {
+       
+        try{
+            store.dispatch('toggleLoader',true);
+            const data = await Api.get(url);
+           // print(data)
+            store.dispatch('product/setIsProductFound',false);
+            store.dispatch('product/pagination',data);
+        }catch(err){
+            store.dispatch('toggleLoader',false);
+            print(err)
+        }finally{
+            store.dispatch('toggleLoader',false);
+        }  
+    }
 
 
 
@@ -44,7 +58,7 @@ const Product = () => {
 
 
     return{
-        getAllProduct,singleProduct
+        getAllProduct,singleProduct,pagination
     }
 }
 export default Product

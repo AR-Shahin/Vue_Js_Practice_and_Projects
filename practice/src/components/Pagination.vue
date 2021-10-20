@@ -1,33 +1,34 @@
 <template>
     <div>
-
     <div class="flex">
-        <a href="#" class="flex items-center px-4 py-2 mx-1 text-gray-500 bg-green-200 rounded-md cursor-not-allowed dark:bg-gray-800 dark:text-gray-600">
-            previous
-        </a>
-
-        <a href="#" class="flex items-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform bg-green-200 rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-green-900 dark:hover:bg-indigo-500 hover:text-white dark:hover:text-gray-200">
-            1
-        </a>
-
-        <a href="#" class="flex items-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform bg-green-200 rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-green-900 dark:hover:bg-indigo-500 hover:text-white dark:hover:text-gray-200">
-            2
-        </a>
-
-        <a href="#" class="flex items-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform bg-green-200 rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-green-900 dark:hover:bg-indigo-500 hover:text-white dark:hover:text-gray-200">
-            3
-        </a>
-
-        <a href="#" class="flex items-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform bg-green-200 rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-green-900 dark:hover:bg-indigo-500 hover:text-white dark:hover:text-gray-200">
-            Next
-        </a>
+         <button 
+          v-for="link in linkss" :key="link.url" class="pagination_default" v-html="link.label" :class="{'pagination_disable':!link.url, 'pagination_not_active':link.url , 'pagination_active' : link.active}"
+          :disabled="!link.url"
+          @click.prevent="pagination(link.url)"
+          ></button>
     </div>
     </div>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
+import {useStore} from 'vuex';
+import Product from "../utilities/composables/Product"
     export default {
-        
+        props:{
+            links:{
+                type: Object
+            }
+        },
+        setup() {
+              const store = useStore();
+            const {pagination} = Product();
+            const linkss = computed(() => store.getters['product/getLinks'])
+
+            return{
+                pagination,linkss
+            }
+        }
     }
 </script>
 

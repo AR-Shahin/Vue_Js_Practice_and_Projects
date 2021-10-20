@@ -4,7 +4,7 @@
             <Product v-for="product in products" :key="product.id" :product="product"/>
         </div>
         <div class="flex justify-center mb-20">
-            <Pagination/>
+            <Pagination :links="links"/>
         </div>
     </div>
 </template>
@@ -23,7 +23,8 @@
             const store = useStore();
             const {getAllProduct} = ProductComposable();
 
-            const products = computed(() => store.getters.getAllProducts)
+            const products = computed(() => store.getters['product/getAllProducts'])
+            const links = computed(() => store.getters['product/getLinks'])
             onMounted(()=> {
                 getAllProduct();
             })
@@ -34,9 +35,8 @@
 
 
 
-
             return{
-                products
+                products,links
             }
         }
     }
