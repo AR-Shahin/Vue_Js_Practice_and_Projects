@@ -10,7 +10,15 @@ const routes = [
         name:'todo',
         component : () => import(/* webpackChunkName: "todo" */ '../pages/ToDo')
     },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component:  () => import( '../pages/404.vue')},
+    { 
+        path: "/mark-down",
+        name:'mark-down',
+        component : () => import(/* webpackChunkName: "mark-down" */ '../pages/MarkDown')
+    },
+    {  path: '/:pathMatch(.*)*',
+       name: 'NotFound',
+       component:  () => import( '../pages/404.vue')
+    },
 ];
 
 export default routes;
