@@ -2,7 +2,7 @@
     <nav class="bg-purple-600 py-3 fixed top-0 left-0 right-0 z-50">
         <div class="container ">
             <div class="flex justify-between">
-            <div><router-link :to="{name:'home'}">Logo {{ authToken}}</router-link>
+            <div><router-link :to="{name:'home'}">Logo </router-link>
             <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click.prevent="modalOpen" v-if="!authToken" >Login</button>
                 <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click.prevent="openRegisterModal" v-if="!authToken">Register</button>
                 <button v-if="authToken" class="btn bg-red-400 text-white" @click="Logout">Logout</button>

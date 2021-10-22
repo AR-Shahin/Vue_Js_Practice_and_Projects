@@ -35,7 +35,7 @@
             <h1 class="text-center text-4xl mb-3">Task with API</h1>
             <div class="flex justify-between border-b-2 pb-3">
                 <div class="items-center">
-                    <h3 class="text-2xl">Manage Todo {{authToken }}</h3>
+                    <h3 class="text-2xl">Manage Todo </h3>
                 </div>
                 <div>
                     <div class="btn-blue" @click="isModalOpen = true"><i class="fa fa-plus-circle"></i></div>
@@ -46,7 +46,7 @@
                 <span class="bg-green-900 p-2 rounded-r text-white flex items-center">Search <i class="fa fa-search mx-2"></i></span>
             </div>
             <div >
-                {{ authToken }}
+            
                 <table class="w-full border" style="min-height:250px">
                 <tr>
                     <th class="border py-3">SL</th>

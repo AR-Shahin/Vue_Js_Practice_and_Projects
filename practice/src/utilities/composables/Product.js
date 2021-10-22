@@ -38,7 +38,7 @@ const Product = () => {
             const data = await Api.get(url);
            // print(data)
             store.dispatch('product/setIsProductFound',false);
-            store.dispatch('product/pagination',data);
+            store.dispatch('product/setAllProduct',data);
         }catch(err){
             store.dispatch('toggleLoader',false);
             print(err)
