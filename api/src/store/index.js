@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import auth from "./modules/auth/index";
-export default createStore({
+const store = createStore({
   state: {
       isLoginModal : false,
       authToken : null
@@ -27,3 +27,5 @@ export default createStore({
     auth
   }
 })
+
+export default store;

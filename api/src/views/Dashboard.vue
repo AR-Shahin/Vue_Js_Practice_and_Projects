@@ -1,18 +1,20 @@
 <template>
     <div>
         <h1 class="text-center">Dashboard</h1>
-        {{ test() }}
+       {{ authUser.name }}
     </div>
 </template>
 
 <script>
-import Product from "@/services/Product";
+
+import { computed } from '@vue/reactivity';
+import { useStore } from 'vuex';
     export default {
         setup(){
-
-            const {test} = Product()
+            const store = useStore();
+            const authUser = computed(()=> store.getters['auth/getAuthUser'])
             return{
-                test
+                authUser
             }
         }
     }

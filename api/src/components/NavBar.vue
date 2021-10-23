@@ -4,15 +4,15 @@
             <div class="flex justify-between">
             <div>
                 <router-link class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'home'}">Home </router-link>
-                <router-link  class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'product'}">Product </router-link>
                 <div class="inline" v-if="isAuthenticate()"> 
+                <router-link  class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'product'}">Product </router-link>
                 <router-link  class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'dashboard'}">Dashboard </router-link>
                 <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click="Logout">Logout</button>
                 </div>
                 <div class="inline" v-if="!isAuthenticate()">
                     <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click="openLoginModal">Login</button>
                 </div>
-{{ isAuthenticate() }}
+                {{ isAuthenticate() }}
             </div>
     
             <div>
