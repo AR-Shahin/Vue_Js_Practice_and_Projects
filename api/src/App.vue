@@ -1,10 +1,12 @@
 <template>
   <nav-bar/>
-  <router-view/>
+   <div class="container mt-20">
+        <router-view></router-view>
+    </div>
   <LoginModal v-if="isLogin" @close-slot-modal="toggleLoginModal">
       <template #heading>Login</template>
       <template #body>
-          <form action="" @submit.prevent="Register">
+          <form action="" @submit.prevent="Login">
             <div class="my-2">
                 <label for="">Email : </label>
                 <InputElement type="email" id="email" placeholder="Enter Your Email" v-model="authUser.email"/>
@@ -35,6 +37,7 @@ import LoginModal from "@/components/Modal";
 import Auth from "@/services/Auth";
 import { computed } from '@vue/reactivity';
 import {useStore} from "vuex"
+
 export default {
     components:{
         NavBar,LoginModal,InputElement
@@ -42,7 +45,7 @@ export default {
     setup(){
     
         const store = useStore();
-        const {authUser} = Auth();
+        const {authUser,Login} = Auth();
         const isLogin = computed(() => store.getters.getIsLoginModal)
 
         const toggleLoginModal = () => {
@@ -50,7 +53,7 @@ export default {
         }
 
         return{
-            authUser,isLogin,toggleLoginModal
+            authUser,isLogin,toggleLoginModal,Login
         }
     }
 }

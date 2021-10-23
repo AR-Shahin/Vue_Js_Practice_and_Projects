@@ -1,12 +1,16 @@
-import { createStore } from 'vuex'
-
+import { createStore } from 'vuex';
+import auth from "./modules/auth/index";
 export default createStore({
   state: {
-      isLoginModal : false
+      isLoginModal : false,
+      authToken : null
   },
   getters:{
     getIsLoginModal(state){
         return state.isLoginModal
+    },
+    getAuthToken(state){
+        return state.authToken
     }
   },
   mutations: {
@@ -20,5 +24,6 @@ export default createStore({
     }
   },
   modules: {
+    auth
   }
 })

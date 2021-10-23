@@ -5,9 +5,14 @@
             <div>
                 <router-link class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'home'}">Home </router-link>
                 <router-link  class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'product'}">Product </router-link>
-                <div class="inline">
+                <div class="inline" v-if="isAuthenticate()"> 
+                <router-link  class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" :to="{name:'dashboard'}">Dashboard </router-link>
+                <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click="Logout">Logout</button>
+                </div>
+                <div class="inline" v-if="!isAuthenticate()">
                     <button class="px-2 mx-2 bg-purple-400 py-1 rounded text-white" @click="openLoginModal">Login</button>
                 </div>
+{{ isAuthenticate() }}
             </div>
     
             <div>
@@ -19,11 +24,12 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
+import Auth from "@/services/Auth";
     export default {
         setup(){
             const store = useStore();
-
+            const {isAuthenticate,Logout} = Auth();
             const openLoginModal = () => {
                 store.dispatch('toggleLoginModal')
             }
@@ -31,7 +37,7 @@ import { useStore } from 'vuex'
 
 
             return {
-                openLoginModal
+                openLoginModal,isAuthenticate,Logout
             }
         }
     }
