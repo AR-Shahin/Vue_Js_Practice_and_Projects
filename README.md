@@ -10,7 +10,7 @@ In this repository I have done a couple of projects using **_VUE 3_** (Compositi
 
 ### To Do Project
 
-<p align="center"><a href="https://ibb.co/s1fXYNZ"><img src="https://www.linkpicture.com/q/Screenshot-from-2021-10-22-19-32-42_2.png" alt="Screenshot-from-2021-04-11-12-13-45" border="1" /></a></p>
+<p align="center"><a href="https://ibb.co/s1fXYNZ"><img src="https://i.ibb.co/M1vJ0tm/Screenshot-from-2021-04-11-12-13-45.png" alt="Screenshot-from-2021-04-11-12-13-45" border="1" /></a></p>
 
 ### Calculator Project
 
